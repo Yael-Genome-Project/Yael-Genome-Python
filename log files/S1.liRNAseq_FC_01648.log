@@ -1,0 +1,137 @@
+Working directory :  S1
+Merging L1 and L2 for R1...
+Merging L1 and L2 for R2...
+Bunzipping R1...
+  R1.fastq.bz2: done
+Bunzip R2...
+  R2.fastq.bz2: done
+Trimming barcode R2:5-12, UMI R2:1-4 and R1:1-30...
+Merging bc, umi and R1 into one file...
+Filtering...
+Quality cut-off: 20
+Minimum percentage: 80
+Input: 185347 reads.
+Output: 181733 reads.
+discarded 3614 (1%) low-quality reads.
+ Moving barcode to header: make sure UMI is on 5th position in the ID...
+Total of 181733 sequences
+Trimming out bc and umi files...
+Map and correct for UMIs...
+/groups/bpf-evergrande/tools/liRNAseq_newdpzpipeline/MapAndCountUMIs_human.sh: line 5: cd: S1.fq: Not a directory
+Running tophat...
+
+[2016-01-15 18:39:12] Beginning TopHat run (v2.0.10)
+-----------------------------------------------
+[2016-01-15 18:39:12] Checking for Bowtie
+		  Bowtie version:	 2.1.0.0
+[2016-01-15 18:39:12] Checking for Samtools
+		Samtools version:	 0.1.19.0
+[2016-01-15 18:39:12] Checking for Bowtie index files (transcriptome)..
+[2016-01-15 18:39:12] Checking for Bowtie index files (genome)..
+[2016-01-15 18:39:12] Checking for reference FASTA file
+[2016-01-15 18:39:12] Generating SAM header for /groups/bpf-evergrande/genomes/hg19/genome
+[2016-01-15 18:40:27] Reading known junctions from GTF file
+[2016-01-15 18:40:32] Preparing reads
+	 left reads: min. length=30, max. length=30, 180433 kept reads (1300 discarded)
+[2016-01-15 18:40:33] Using pre-built transcriptome data..
+[2016-01-15 18:40:39] Mapping left_kept_reads to transcriptome transcriptome with Bowtie2 
+[2016-01-15 18:40:53] Resuming TopHat pipeline with unmapped reads
+[2016-01-15 18:40:53] Mapping left_kept_reads.m2g_um to genome genome with Bowtie2 
+[2016-01-15 18:41:17] Mapping left_kept_reads.m2g_um_seg1 to genome genome with Bowtie2 (1/2)
+[2016-01-15 18:41:29] Mapping left_kept_reads.m2g_um_seg2 to genome genome with Bowtie2 (2/2)
+[2016-01-15 18:41:43] Searching for junctions via segment mapping
+[2016-01-15 18:43:58] Retrieving sequences for splices
+[2016-01-15 18:46:26] Indexing splices
+[2016-01-15 18:46:43] Mapping left_kept_reads.m2g_um_seg1 to genome segment_juncs with Bowtie2 (1/2)
+[2016-01-15 18:46:50] Mapping left_kept_reads.m2g_um_seg2 to genome segment_juncs with Bowtie2 (2/2)
+[2016-01-15 18:46:57] Joining segment hits
+[2016-01-15 18:49:34] Reporting output tracks
+-----------------------------------------------
+[2016-01-15 18:51:58] A summary of the alignment counts can be found in ./thoutfs/align_summary.txt
+[2016-01-15 18:51:58] Run complete: 00:12:46 elapsed
+Removing multiple alignments
+Annotating bam file with gene name...
+Sorting and indexing bam file
+UMI correction: writing correcting bam file and count file...
+command line: Rscript add_umi_id.R exons S1.uniqalign.genenames.sorted.bam 
+current working directory: /groups/bpf-evergrande/alos_data/FC_01648/Unaligned_1_PF_mm1/Data/Project_yael/S1/lecseq/thoutfs 
+working on file: S1.uniqalign.genenames.sorted.bam 
+counting reads in: exons 
+PART1: Correcting for UMIs:
+Reads bam and makes a data frame of it
+Keeps only reads with a gene name assigned...
+Extracts UMIs from the read's IDs...
+Filters UMIs to keep distinct ones per gene...
+Writes the UMI corrected bam file...
+PART2: Counts reads in genes
+GRangesList object of length 23725:
+$100009600 
+GRanges object with 7 ranges and 2 metadata columns:
+      seqnames               ranges strand |   exon_id   exon_name
+         <Rle>            <IRanges>  <Rle> | <integer> <character>
+  [1]     chr9 [21062393, 21062717]      - |    133241        <NA>
+  [2]     chr9 [21062894, 21062987]      - |    133242        <NA>
+  [3]     chr9 [21063314, 21063396]      - |    133243        <NA>
+  [4]     chr9 [21066024, 21066377]      - |    133244        <NA>
+  [5]     chr9 [21066940, 21067925]      - |    133245        <NA>
+  [6]     chr9 [21068030, 21068117]      - |    133246        <NA>
+  [7]     chr9 [21073075, 21075496]      - |    133248        <NA>
+
+$100009609 
+GRanges object with 6 ranges and 2 metadata columns:
+      seqnames               ranges strand | exon_id exon_name
+  [1]     chr7 [84940169, 84941088]      - |  108923      <NA>
+  [2]     chr7 [84943141, 84943264]      - |  108924      <NA>
+  [3]     chr7 [84943504, 84943722]      - |  108925      <NA>
+  [4]     chr7 [84946200, 84947000]      - |  108926      <NA>
+  [5]     chr7 [84947372, 84947651]      - |  108927      <NA>
+  [6]     chr7 [84963816, 84964009]      - |  108928      <NA>
+
+$100009614 
+GRanges object with 1 range and 2 metadata columns:
+      seqnames               ranges strand | exon_id exon_name
+  [1]    chr10 [77711446, 77712009]      + |  142611      <NA>
+
+...
+<23722 more elements>
+-------
+seqinfo: 66 sequences (1 circular) from mm10 genome
+Error in validObject(.Object) : 
+  invalid class “SummarizedExperiment” object: 'rowRanges' length differs from 'assays' nrow
+Calls: summarizeOverlaps ... <Anonymous> -> initialize -> initialize -> validObject
+Execution halted
+Stats...
+Removing files...
+Copying files...
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@clarinet002-092.orchestra>
+Subject: Job 2926659: </groups/bpf-evergrande/tools/liRNAseq_newdpzpipeline/liRNAseq_pipeline_2_human.sh S1 S1> Done
+
+Job </groups/bpf-evergrande/tools/liRNAseq_newdpzpipeline/liRNAseq_pipeline_2_human.sh S1 S1> was submitted from host <mezzanine.orchestra> by user <ad249> in cluster <hms_orchestra>.
+Job was executed on host(s) <2*clarinet002-092.orchestra>, in queue <mcore>, as user <ad249> in cluster <hms_orchestra>.
+</home/ad249> was used as the home directory.
+</groups/bpf-evergrande/alos_data/FC_01648/Unaligned_1_PF_mm1/Data/Project_yael> was used as the working directory.
+Started at Fri Jan 15 18:38:41 2016
+Results reported at Fri Jan 15 18:54:47 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+/groups/bpf-evergrande/tools/liRNAseq_newdpzpipeline/liRNAseq_pipeline_2_human.sh S1 S1
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   1002.26 sec.
+    Max Memory :      3068 MB
+    Max Swap   :      3774 MB
+
+    Max Processes  :         9
+    Max Threads    :        10
+
+The output (if any) is above this job summary.
+
