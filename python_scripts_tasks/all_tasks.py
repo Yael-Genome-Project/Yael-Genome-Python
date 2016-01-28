@@ -22,13 +22,19 @@ for root, dirs, files in os.walk(file_path):
 
 print ("Part I ok!")
 
-x = sys.argv[1] # x = runScript_mouse.sh
+x = sys.argv[1]  # the location of runScript_human.sh or  runScript_mouse.sh, this one really depends on the user
+# ex. /groups/immdiv-bioinfo/evergrande/copy_work/yael/FC_01744/Project_yael/test_scripts/runScript_mouse.sh
+y = sys.argv[2]  # the destination of .b2z folder that they want to run the mouse script  or human script
+# ex./groups/immdiv-bioinfo/evergrande/copy_work/yael/FC_01744/Project_yael/mouse_S9-S10/S10/+myfolder[0] +"/"q
 
-src = "/groups/immdiv-bioinfo/evergrande/copy_work/yael/FC_01744/Project_yael/test_scripts/" + x    #the dir of runScript_mouse.sh
-dst = "/groups/immdiv-bioinfo/evergrande/copy_work/yael/FC_01744/Project_yael/mouse_S9-S10/S10/"+myfolder[0] +"/"   #the dir of dst folder
+src = "x"
+dst = "y"
 
-shutil.copy(src, dst)   #copy runScript_mouse.sh from src to dst
-y = dst + x     #set shell command
+shutil.copy(src, dst)   #copy runScript_mouse.sh from mouseS to humanS
+
+run_script = x[-18 : ]
+
+y=dst+run_script #set shell command
 
 subprocess.call([y])    #run runScript_mouse.sh
 
