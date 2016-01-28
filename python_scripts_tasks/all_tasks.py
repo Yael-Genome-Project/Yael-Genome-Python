@@ -30,7 +30,7 @@ y = sys.argv[2]  # the destination of .b2z folder that they want to run the mous
 src = "x"
 dst = "y"
 
-shutil.copy(src, dst)   #copy runScript_mouse.sh from mouseS to humanS
+shutil.copy(src, dst)   # ccopy runScript_mouse.sh/runScript_human.sh from src to dst location
 
 run_script = x[-18 : ]
 
